@@ -14,6 +14,7 @@ const loadCategory = () => {
 const loadProduct = (category = null) => {
     let params = '';
     if (category) params = `category/${category.id}`;
+
     let loader = document.getElementById('loader');
     loader.style.display = "block";
     fetch(`https://api.allorigins.win/raw?url=https://fakestoreapi.com/products/${params}`)
@@ -28,13 +29,13 @@ const loadProduct = (category = null) => {
                             <div class="card-body">
                                 <h5 class="card-title">${element.title.split(' ').slice(0, 4).join(' ')}</h5>
                                 <p class="card-text">${element.price}</p>
-                                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                                <div class="text-center"><a href="#" class="btn btn-secondary btn-sm">View</a></div>
                             </div>
                         </div>
                     </div>`
             });
             document.getElementById('products').innerHTML = html;
-            document.getElementById('product_category').textContent = category.id;
+            document.getElementById('product_category').textContent = category ? category.id : 'Products';
             setTimeout(() => {
                 loader.style.display = "none";
             }, 1000);
